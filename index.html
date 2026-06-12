@@ -1142,7 +1142,6 @@ function saveCourse(cid){
   SESSIONS.forEach(s=>{ if(!byDate[s.date])byDate[s.date]={}; if(!byDate[s.date][s.cid])byDate[s.date][s.cid]=[]; byDate[s.date][s.cid].push(s); });
   if(document.getElementById('detail').classList.contains('active')) renderCalendar();
 })();
-</script>
 
 function toggleEditMode(){
   editMode = !editMode;
