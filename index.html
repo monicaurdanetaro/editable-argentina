@@ -160,13 +160,13 @@ body { font-family:'Nunito',sans-serif; min-height:100vh; overflow-x:hidden; }
 .cal-table { width:100%; border-collapse:collapse; table-layout:fixed; }
 .cal-table thead th { border-right:1px solid var(--border); border-bottom:2px solid var(--border); padding:0; }
 .cal-table thead th:last-child { border-right:none; }
-.cal-table thead th.label-th { border-right:2px solid var(--border); width:150px; min-width:150px; }
+.cal-table thead th.label-th { border-right:2px solid var(--border); width:150px; min-width:150px; position:sticky; left:0; z-index:3; background:#f8f9fd; }
 .date-box { padding:9px 6px 7px; text-align:center; }
 .date-box-dayname { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--text-soft); margin-bottom:1px; }
 .date-box-num { font-size:20px; font-weight:900; color:var(--navy); line-height:1; }
 thead th.week-odd .date-box { background:#d5dff0; }
 thead th.week-even .date-box { background:#eef2fb; }
-.cal-table tbody td.row-label-col { width:150px; min-width:150px; background:#f8f9fd; border-right:2px solid var(--border); border-bottom:1px solid var(--border); padding:0 14px; vertical-align:middle; }
+.cal-table tbody td.row-label-col { width:150px; min-width:150px; background:#f8f9fd; border-right:2px solid var(--border); border-bottom:1px solid var(--border); padding:0 14px; vertical-align:middle; position:sticky; left:0; z-index:2; }
 .row-label-inner { display:flex; align-items:center; gap:8px; }
 .row-label-bar { width:4px; height:32px; border-radius:4px; flex-shrink:0; }
 .row-label-name { font-size:11px; font-weight:800; color:var(--navy); line-height:1.2; }
@@ -287,7 +287,7 @@ body.edit-mode .row-label-col:hover { background:#fff3e8 !important; }
         <div class="cap-population" style="color:var(--c0)">Farmacéuticos</div>
         <div class="cap-name">Asesoría Farmacéutica</div>
         <div class="cap-tags"><span class="cap-tag">2.5 horas</span><span class="cap-tag">Junio</span><span class="cap-tag">2 grupos</span><span class="cap-tag" style="background:#eef1fd;color:var(--c0);border-color:#c5d0f8">👥 32 participantes</span></div>
-        <div class="cap-tags" style="margin-top:-6px"><span class="cap-tag" style="background:#f0f9ff;color:#0369a1;border-color:#bae6fd">⏱ Participante: 2.5h</span><span class="cap-tag" style="background:#f0f9ff;color:#0369a1;border-color:#bae6fd">🎓 Facilitador: 1 día completo</span></div>
+        <div class="cap-tags" style="margin-top:-6px"><span class="cap-tag" style="background:#f0f9ff;color:#0369a1;border-color:#bae6fd">⏱ Inversión de tiempo facilitador: 1 día completo</span></div>
         <div class="cap-capacidades"><strong>Contenido</strong>Conociendo Farmatodo · El rol del farmacéutico en Farmatodo · Consulta farmacéutica de calidad · Dispensación con propósito · Un servicio que nos diferencia</div>
         <div class="cap-facilitators"><span class="cap-facilitators-icon">🎓</span><span><span class="cap-facilitators-label">Facilitadores: </span>Yessika Santos, Soledad Díaz y Cecilia Soria</span></div>
       </div>
@@ -296,7 +296,7 @@ body.edit-mode .row-label-col:hover { background:#fff3e8 !important; }
         <div class="cap-population" style="color:var(--c1)">Personal base de farmacia</div>
         <div class="cap-name">Atención en el mostrador de farmacia</div>
         <div class="cap-tags"><span class="cap-tag">3 horas</span><span class="cap-tag">Jun – Jul</span><span class="cap-tag">12 grupos</span><span class="cap-tag" style="background:#e9f7ef;color:var(--c1);border-color:#b7e4c7">👥 160 participantes</span></div>
-        <div class="cap-tags" style="margin-top:-6px"><span class="cap-tag" style="background:#f0f9ff;color:#0369a1;border-color:#bae6fd">⏱ Participante: 3h</span><span class="cap-tag" style="background:#f0f9ff;color:#0369a1;border-color:#bae6fd">🎓 Facilitador: 2 días completos</span></div>
+        <div class="cap-tags" style="margin-top:-6px"><span class="cap-tag" style="background:#f0f9ff;color:#0369a1;border-color:#bae6fd">⏱ Inversión de tiempo facilitador: 2 días completos</span></div>
         <div class="cap-capacidades"><strong>Contenido</strong>Conociendo Farmatodo · El rol del farmacéutico en Farmatodo · Consulta farmacéutica de calidad · Dispensación con propósito · Un servicio que nos diferencia</div>
         <div class="cap-facilitators"><span class="cap-facilitators-icon">🎓</span><span><span class="cap-facilitators-label">Facilitadores: </span>Yessika Santos, Soledad Díaz y Deildre Barroso</span></div>
       </div>
@@ -305,7 +305,7 @@ body.edit-mode .row-label-col:hover { background:#fff3e8 !important; }
         <div class="cap-population" style="color:var(--c2)">Personal base</div>
         <div class="cap-name">Servicio al Cliente y 5 Conductas de Servicio</div>
         <div class="cap-tags"><span class="cap-tag">2.5 horas</span><span class="cap-tag">Jul</span><span class="cap-tag">8 grupos · 10 c/u</span><span class="cap-tag" style="background:#fef3e7;color:var(--c2);border-color:#f8d4a8">👥 80 participantes</span></div>
-        <div class="cap-tags" style="margin-top:-6px"><span class="cap-tag" style="background:#f0f9ff;color:#0369a1;border-color:#bae6fd">⏱ Participante: 2.5h</span><span class="cap-tag" style="background:#f0f9ff;color:#0369a1;border-color:#bae6fd">🎓 Facilitador: 2 días completos</span></div>
+        <div class="cap-tags" style="margin-top:-6px"><span class="cap-tag" style="background:#f0f9ff;color:#0369a1;border-color:#bae6fd">⏱ Inversión de tiempo facilitador: 2 días completos</span></div>
         <div class="cap-capacidades"><strong>Contenido</strong>Cultura de servicio Farmatodo y las 5 conductas de servicio aplicadas a situaciones reales de tienda</div>
         <div class="cap-facilitators"><span class="cap-facilitators-icon">🎓</span><span><span class="cap-facilitators-label">Facilitadores: </span><br><span style="display:inline-flex;align-items:center;gap:6px;margin:2px 0"><span style="background:#fef3e7;border:1px solid #f8d4a8;border-radius:5px;padding:1px 7px;font-size:10px;font-weight:800;color:#e67e22">ÁREA 1</span> Yajaira Urdaneta · Guillermo Dulce</span><br><span style="display:inline-flex;align-items:center;gap:6px;margin:2px 0"><span style="background:#fef3e7;border:1px solid #f8d4a8;border-radius:5px;padding:1px 7px;font-size:10px;font-weight:800;color:#e67e22">ÁREA 2</span> Carlos Carrión · Oswaldo Saldivia</span><br><span style="display:inline-flex;align-items:center;gap:6px;margin:2px 0"><span style="background:#fef3e7;border:1px solid #f8d4a8;border-radius:5px;padding:1px 7px;font-size:10px;font-weight:800;color:#e67e22">ÁREA 3</span> Cristian Díaz · Gustavo Henriquez</span></span></div>
       </div>
@@ -487,8 +487,8 @@ const SESSIONS = [
   {id:'s24',date:'2026-07-01',cid:4,group:'Formación en tiendas',continuous:true},
 
   // Inventario - 30/06 AM y PM
-  {id:'s25',date:'2026-06-30',cid:5,group:'Cada Gerente de área',slot:'am',facilitator:'Gerentes de área'},
-  {id:'s26',date:'2026-06-30',cid:5,group:'Cada Gerente de área',slot:'pm',facilitator:'Gerentes de área'},
+  {id:'s25',date:'2026-06-30',cid:5,group:'',slot:'am',facilitator:'Gtes de área'},
+  {id:'s26',date:'2026-06-30',cid:5,group:'',slot:'pm',facilitator:'Gtes de área'},
 ];
 
 const byDate = {};
@@ -586,7 +586,7 @@ function renderCalendar(){
 
   // Row 1: month banners
   const monthRow=document.createElement('tr');
-  const mc=document.createElement('th'); mc.style.cssText='background:#f8f9fd;border-right:2px solid var(--border);border-bottom:1px solid var(--border);'; monthRow.appendChild(mc);
+  const mc=document.createElement('th'); mc.style.cssText='background:#f8f9fd;border-right:2px solid var(--border);border-bottom:1px solid var(--border);position:sticky;left:0;z-index:4;'; monthRow.appendChild(mc);
   const MCOLS={5:{bg:'#1a2e6b',text:'#fff'},6:{bg:'#3b5fe2',text:'#fff'}};
   monthSpans.forEach(({month,count})=>{ const col=MCOLS[month]||{bg:'var(--navy)',text:'#fff'}; const th=document.createElement('th'); th.colSpan=count; th.style.cssText=`background:${col.bg};color:${col.text};font-family:'Nunito',sans-serif;font-size:11px;font-weight:800;text-align:center;padding:6px 0;letter-spacing:.06em;text-transform:uppercase;border-right:1px solid rgba(255,255,255,0.2);border-bottom:1px solid var(--border);`; th.textContent=MONTHS[month].toUpperCase(); monthRow.appendChild(th); });
   thead.appendChild(monthRow);
@@ -667,7 +667,7 @@ function renderCalendar(){
               mini.onclick=()=>openModal(s,day);
             } else {
               // Normal session — single or part of multi
-              const firstName = facLine ? facLine.split(' ')[0] : '';
+              const firstName = facLine ? (s.cid === 5 ? facLine : facLine.split(' ')[0]) : '';
               mini.style.cssText=`background:${c.colorLt};border-left:3px solid ${c.color};border-radius:7px;padding:5px 7px;cursor:pointer;display:flex;flex-direction:column;justify-content:center;min-height:${sessArr.length===1?'56px':'24px'};`;
               mini.innerHTML=`<div style="display:flex;align-items:center;gap:3px;flex-wrap:wrap">${slotLabel?`<span style="background:${c.color};color:#fff;border-radius:3px;padding:0 4px;font-size:7px;font-weight:800">${slotLabel}</span>`:''}<span style="font-size:8px;font-weight:800;color:var(--navy)">${s.group}</span></div>${firstName?`<div style="font-size:7.5px;color:${c.color};font-weight:600;margin-top:1px;line-height:1.2;opacity:.9">${firstName}</div>`:''}`;
               mini.onclick=()=>openModal(s,day);
