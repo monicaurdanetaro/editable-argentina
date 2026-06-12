@@ -171,7 +171,7 @@ thead th.week-even .date-box { background:#eef2fb; }
 .row-label-bar { width:4px; height:32px; border-radius:4px; flex-shrink:0; }
 .row-label-name { font-size:11px; font-weight:800; color:var(--navy); line-height:1.2; }
 .row-label-pop { font-size:9px; font-weight:600; color:var(--text-soft); margin-top:1px; }
-.cal-table tbody tr td.data-cell { border-right:1px solid var(--border); border-bottom:1px solid var(--border); padding:5px; vertical-align:middle; }
+.cal-table tbody tr td.data-cell { border-right:1px solid var(--border); border-bottom:1px solid var(--border); padding:4px; vertical-align:top; height:90px; }
 .cal-table tbody tr td.data-cell:last-child { border-right:none; }
 .cal-table tbody tr:last-child td { border-bottom:none; }
 .sess-pill { border-radius:8px; padding:7px 8px; cursor:pointer; transition:all .15s; border-left:4px solid transparent; height:62px; display:flex; flex-direction:column; justify-content:center; overflow:hidden; }
@@ -646,40 +646,38 @@ function renderCalendar(){
         if(HOLIDAYS.includes(key)) td.style.background='#f4f4f4';
         const sessArr=byDate[key]&&byDate[key][c.id];
         if(sessArr&&sessArr.length>0){
-          const pill=document.createElement('div'); pill.className='sess-pill'; pill.style.cssText=`background:${c.colorLt};border-left-color:${c.color};`;
-          const isSplit=sessArr.length>=2&&sessArr.some(s=>s.slot);
-          const isSim=sessArr.length===1&&sessArr[0].simultaneous;
-          const isTrainer=sessArr.length===1&&sessArr[0].trainer;
-          if(isTrainer){
-            pill.style.cssText='background:#f0f0f4;border-left-color:#9aa0b0;border-left-width:4px;border-left-style:solid;border-radius:8px;padding:5px 7px;height:62px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;cursor:pointer;transition:all .15s;';
-            pill.innerHTML=`<div style="font-size:8px;font-weight:800;color:#9aa0b0;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px;white-space:nowrap">Preparación</div><div style="font-size:8.5px;font-weight:700;color:#5a6070;line-height:1.25;word-break:break-word">Entrenamiento facilitadores</div>`;
-            pill.onclick=()=>openTrainerModal(sessArr[0],day,c);
-          } else if(isSplit){
-            // Show each session as a compact row with group + facilitator
-            const rows = sessArr.map(s=>{
-              const slotLabel = s.slot==='am' ? 'AM' : s.slot==='pm' ? 'PM' : '';
-              const facShort = s.facilitator ? s.facilitator.split(' ')[0] : '';
-              return `<span style="background:${c.color}${s.slot==='am'?'22':'11'};color:${c.color};border:1px solid ${c.color}${s.slot==='am'?'44':'33'};border-radius:5px;padding:1px 5px;font-size:8px;font-weight:800;line-height:1.5;display:flex;align-items:center;gap:3px;cursor:pointer" onclick="event.stopPropagation();openModal(${JSON.stringify(s).replace(/"/g,"'")},${JSON.stringify(day).replace(/"/g,"'")})">
-                <span style="opacity:.7">${slotLabel}</span> ${s.group}${facShort?' · '+facShort:''}
-              </span>`;
-            }).join('');
-            pill.style.cssText=`background:${c.colorLt};border-left:4px solid ${c.color};border-radius:8px;padding:4px 6px;height:${Math.max(62, sessArr.length*20+10)}px;display:flex;flex-direction:column;justify-content:center;gap:2px;overflow:hidden;cursor:default;`;
-            pill.innerHTML=`<div style="font-size:9px;font-weight:800;color:var(--navy);margin-bottom:3px">${c.short}</div>${rows}`;
-            pill.onclick=null;
-          } else if(isSim){
-            pill.innerHTML=`<div class="sess-pill-name" style="margin-bottom:4px">${c.short}</div><div style="display:flex;flex-direction:column;gap:3px">
-              <span style="background:${c.color};color:#fff;border-radius:4px;padding:2px 6px;font-size:9px;font-weight:800;display:inline-block;width:fit-content">SIMULT.</span>
-              <span style="font-size:9px;font-weight:700;color:${c.color};line-height:1.3">${sessArr[0].group}</span></div>`;
-            pill.onclick=()=>openModal(sessArr[0],day);
-          } else {
-            const s=sessArr[0];
-            const slotSuffix = s.slot ? (s.slot === 'am' ? ' · AM' : ' · PM') : '';
-            const facShort = s.facilitator ? s.facilitator : '';
-            pill.innerHTML=`<div class="sess-pill-name">${c.short}</div><div class="sess-pill-group" style="color:${c.color}">${s.group}${slotSuffix}</div>${facShort?`<div style="font-size:8px;color:${c.color};opacity:.75;margin-top:1px;font-weight:600">${facShort}</div>`:''}`;
-            pill.onclick=()=>openModal(s,day);
-          }
-          pill.addEventListener('mouseenter',()=>{ pill.style.filter='brightness(.93)'; pill.style.transform='translateY(-1px)'; pill.style.boxShadow='var(--shadow)'; });
-          pill.addEventListener('mouseleave',()=>{ pill.style.filter=''; pill.style.transform=''; pill.style.boxShadow=''; });
+          // CONTAINER — always same height as empty cell (62px), flex column
+          const container = document.createElement('div');
+          container.style.cssText='display:flex;flex-direction:column;gap:3px;min-height:62px;';
+
+          sessArr.forEach(s=>{
+            const mini = document.createElement('div');
+            const isTrainer = s.trainer;
+            const isSim = s.simultaneous;
+            const slotLabel = s.slot==='am'?'AM':s.slot==='pm'?'PM':'';
+            const facLine = s.facilitator||'';
+
+            if(isTrainer){
+              mini.style.cssText='background:#f0f0f4;border-left:3px solid #9aa0b0;border-radius:7px;padding:5px 7px;cursor:pointer;flex:1;display:flex;flex-direction:column;justify-content:center;min-height:56px;';
+              mini.innerHTML=`<div style="font-size:8px;font-weight:800;color:#9aa0b0;text-transform:uppercase;letter-spacing:.04em">Preparación</div><div style="font-size:8px;font-weight:700;color:#5a6070;margin-top:2px">Entrenamiento facilitadores</div>`;
+              mini.onclick=()=>openTrainerModal(s,day,c);
+            } else if(isSim){
+              mini.style.cssText=`background:${c.colorLt};border-left:3px solid ${c.color};border-radius:7px;padding:5px 7px;cursor:pointer;flex:1;display:flex;flex-direction:column;justify-content:center;min-height:56px;`;
+              mini.innerHTML=`<div style="font-size:9px;font-weight:800;color:var(--navy)">${c.short}</div><div style="display:flex;align-items:center;gap:4px;margin-top:3px"><span style="background:${c.color};color:#fff;border-radius:4px;padding:1px 5px;font-size:8px;font-weight:800">SIMULT.</span><span style="font-size:8px;font-weight:700;color:${c.color}">${s.group}</span></div>${facLine?`<div style="font-size:8px;color:${c.color};opacity:.8;margin-top:2px;font-weight:600">${facLine}</div>`:''}`;
+              mini.onclick=()=>openModal(s,day);
+            } else {
+              // Normal session — single or part of multi
+              const firstName = facLine ? facLine.split(' ')[0] : '';
+              mini.style.cssText=`background:${c.colorLt};border-left:3px solid ${c.color};border-radius:7px;padding:5px 7px;cursor:pointer;display:flex;flex-direction:column;justify-content:center;min-height:${sessArr.length===1?'56px':'24px'};`;
+              mini.innerHTML=`<div style="display:flex;align-items:center;gap:3px;flex-wrap:wrap">${slotLabel?`<span style="background:${c.color};color:#fff;border-radius:3px;padding:0 4px;font-size:7px;font-weight:800">${slotLabel}</span>`:''}<span style="font-size:8px;font-weight:800;color:var(--navy)">${s.group}</span></div>${firstName?`<div style="font-size:7.5px;color:${c.color};font-weight:600;margin-top:1px;line-height:1.2;opacity:.9">${firstName}</div>`:''}`;
+              mini.onclick=()=>openModal(s,day);
+            }
+            mini.addEventListener('mouseenter',()=>{mini.style.filter='brightness(.93)';});
+            mini.addEventListener('mouseleave',()=>{mini.style.filter='';});
+            container.appendChild(mini);
+          });
+
+          const pill = container; // keep variable name for existing code below
           td.appendChild(pill);
         } else { td.innerHTML='<div class="empty-cell"><div class="empty-dash"></div></div>'; }
         tr.appendChild(td);
